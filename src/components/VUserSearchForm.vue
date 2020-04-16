@@ -1,8 +1,17 @@
 <template>
   <form @submit.prevent="$emit('submitted', username)">
-    <input type="text" v-model="username" placeholder="Search for github user profile via github username" />
-    <button type="submit">Submit</button>
-    <div style="font-size: 12px;">(Search for github user profile via github username)</div>
+     <el-input 
+        v-model="username" 
+        placeholder="Search for github user profile via github username" 
+        class="search-form__input"
+      >
+        <el-button
+          class="search-form__button"
+          native-type="submit"
+          slot="append"
+          icon="el-icon-search"
+        >Submit</el-button>
+     </el-input>
   </form>
 </template>
 
