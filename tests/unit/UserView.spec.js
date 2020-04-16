@@ -5,6 +5,7 @@
     4. The events
     5. Extreme cases (i.e. how it will behave with an empty list, a list with 5 items, or 100 items.)
 */
+
 import { shallowMount } from "@vue/test-utils";
 import UserView from "@/views/UserView";
 import VUserSearchForm from "@/components/VUserSearchForm";
