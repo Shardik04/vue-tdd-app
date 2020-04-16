@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import VUserSearchForm from '@/components/VUserSearchForm'
 import VUserProfile from '@/components/VUserProfile'
 
@@ -15,12 +16,19 @@ export default {
         VUserSearchForm,
         VUserProfile
     },
+    // with vuex state passing user
+    computed: {
+        ...mapState({
+        user: 'user',
+    }),
+    // without vuex passing prop to component
     data() {
         return {
-            user: {
+            user1: {
                 name: ''
             }
         }
     }
+  }
 }
 </script>
