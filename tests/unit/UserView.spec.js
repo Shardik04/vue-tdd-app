@@ -6,12 +6,14 @@
     5. Extreme cases (i.e. how it will behave with an empty list, a list with 5 items, or 100 items.)
 */
 
+jest.mock('@/store/actions')
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import UserView from "@/views/UserView";
 import VUserSearchForm from "@/components/VUserSearchForm";
 import VUserProfile from "@/components/VUserProfile";
 import Vuex from 'vuex'
 import initialState from '@/store/state'
+import actions from '@/store/actions'
 import userFixture from './fixtures/user'
 
 
@@ -62,7 +64,7 @@ describe("UserView", () => {
     // with vuex above code
     const wrapper = shallowMount(UserView, {
       localVue,
-      store: new Vuex.Store({ state })
+      store: new Vuex.Store({ state, actions })
     })
 
     return {
@@ -96,6 +98,7 @@ describe("UserView", () => {
 
   // when using vuex states
   beforeEach(() => {
+    jest.resetAllMocks()  // resetting among each test, all the mock functions to the original state, so that no test impacts on the result of the others.
     state = { ...initialState }
   })
 
@@ -122,4 +125,20 @@ describe("UserView", () => {
         expect(userProfile().vm.user).toBe(state.user)
 
   });
+
+
+  // 4. events submitted
+  it('searches for a user when received "submitted"', () => {
+    // arrange
+    const expectedUser = 'Hardik'
+    const { userSearchForm } = build()
+
+    // act
+    userSearchForm().vm.$emit('submitted', expectedUser)
+
+    // assert
+    expect(actions.SEARCH_USER).toHaveBeenCalled()
+    expect(actions.SEARCH_USER.mock.calls[0][1]).toEqual({ username: expectedUser })
+  }) 
+
 });

@@ -2,9 +2,10 @@ import api from '@/api'
 
 export default {
   SEARCH_USER({ commit }, { username }) {
-    return new Promise((resolve, reject) => {
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (resolve, reject) => {
       try {
-        const user = api.searchUser(username)
+        const user = await api.searchUser(username)
         commit('SET_USER', user)
         resolve(user)
       } catch(error) {

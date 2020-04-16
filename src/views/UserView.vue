@@ -1,6 +1,8 @@
 <template>
     <div>
-        <VUserSearchForm />
+        <VUserSearchForm 
+            @submitted="searchUser" 
+        />
         <VUserProfile :user="user" />
     </div>
 </template>
@@ -19,8 +21,9 @@ export default {
     // with vuex state passing user
     computed: {
         ...mapState({
-        user: 'user',
-    }),
+            user: 'user',
+        })
+    },
     // without vuex passing prop to component
     data() {
         return {
@@ -28,7 +31,11 @@ export default {
                 name: ''
             }
         }
+    },
+    methods: {
+        searchUser(username) {
+            this.$store.dispatch('SEARCH_USER', { username })
+        }
     }
-  }
 }
 </script>
