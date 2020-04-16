@@ -5,6 +5,5 @@ exports[`VUserSearchForm renders the component  1`] = `
   <el-input-stub value="" type="text" autocomplete="off" validateevent="true" placeholder="Search for github user profile via github username" class="search-form__input">
     <el-button-stub type="default" icon="el-icon-search" nativetype="submit" class="search-form__button">Submit</el-button-stub>
   </el-input-stub>
-  <div style="font-size: 12px;">(Search for github user profile via github username)</div>
 </form>
 `;
